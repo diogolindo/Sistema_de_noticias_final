@@ -14,13 +14,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `sistema_noticias` DEFAULT CHARACTER SET utf8 ;
-USE `sistema_noticias` ;
+CREATE SCHEMA IF NOT EXISTS `sistema_noticia` DEFAULT CHARACTER SET utf8 ;
+USE `sistema_noticia` ;
 
 -- -----------------------------------------------------
 -- Table `sistema_noticias`.`usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sistema_noticias`.`usuario` (
+CREATE TABLE IF NOT EXISTS `sistema_noticia`.`usuario` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
@@ -31,9 +31,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `sistema_noticias`.`noticia`
+-- Table `sistema_noticia`.`noticia`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sistema_noticias`.`noticia` (
+CREATE TABLE IF NOT EXISTS `sistema_noticia`.`noticia` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `titulo` VARCHAR(45) NOT NULL,
   `descricao` VARCHAR(10000) NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `sistema_noticias`.`noticia` (
   INDEX `fk_noticia_usuario_idx` (`usuario_id` ASC),
   CONSTRAINT `fk_noticia_usuario`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `sistema_noticias`.`usuario` (`id`)
+    REFERENCES `sistema_noticia`.`usuario` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -54,7 +54,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `sistema_noticias`.`table1`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sistema_noticias`.`comentario` (
+CREATE TABLE IF NOT EXISTS `sistema_noticia`.`comentario` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `comentario` VARCHAR(1024) NOT NULL,
   `nome` VARCHAR(45) NULL,
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `sistema_noticias`.`comentario` (
   INDEX `fk_table1_noticia1_idx` (`noticia_id` ASC),
   CONSTRAINT `fk_table1_noticia1`
     FOREIGN KEY (`noticia_id`)
-    REFERENCES `sistema_noticias`.`noticia` (`id`)
+    REFERENCES `sistema_noticia`.`noticia` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

@@ -135,10 +135,12 @@ class Noticia{
     public  function delete(){
         $id = $_SESSION['not_id'];
         $conexao=Conexao::getConexao();
+        $conexao->query("SET FOREIGN_KEY_CHECKS=0");
         $conexao->query("
             DELETE FROM noticia
             WHERE id = '".$id."'"
         );
+        $conexao->query("SET FOREIGN_KEY_CHECKS=1");
         echo "<h2>Notícia excluída!</h2>";
         $this->listar();
     }
@@ -178,11 +180,13 @@ class Noticia{
                 $titulo = $_POST['titulo'];
                 $descricao = $_POST['descricao'];
                 $conexao=Conexao::getConexao();
+                $conexao->query("SET FOREIGN_KEY_CHECKS=0");
                 $conexao->query("
                     UPDATE noticia
                     SET titulo = '".$titulo."', descricao = '".$descricao."'
                     WHERE id = '".$id."'"
                 );
+                $conexao->query("SET FOREIGN_KEY_CHECKS=1");
                 
                 echo "<h2>Notícia atualizada com sucesso!</h2>";
                 $this->ver($id);
